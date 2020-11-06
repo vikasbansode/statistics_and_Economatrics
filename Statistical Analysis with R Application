@@ -1,3 +1,4 @@
+
 setwd("C:\\Users\\VB\\Desktop\\stat with R")
 
 # Types of Analytics
@@ -12,13 +13,44 @@ setwd("C:\\Users\\VB\\Desktop\\stat with R")
 # Variety ; More sources means more data in different format and types such as
 # Images, videos, voice, speech,textual data, numerical both structured and unstructured.
 
-# Descriptive Statistics, Inferential Statistics and Regression Analysis
+# Branches of Statistics
+  1. Descriptive Statistics ->>  Descriptive statistics is used to summarizes the data set and variables.
+    a. Measures of central tendency
+    b. Measures of Dispersion
+    c. Measures of Shapes
+    d. Correlation and Covaraince
+    e. Visualization
+  2. Inferential Statistics ->> Inferential statistics is used to identify the relationship between data sets. 
+    a. Estimation
+    b. Hypothesis Testing
+  3. Regression Analysis ->> Regression Analysis is used to identify the relationship between Variables.
+    a. Simple Linear Regression
+    b. Multiple Linear Regression
 
-# Descriptive statistics is used to summarizes the data set and variables.
-# Inferential statistics is used to identify the relationship between data sets.
-# Regression Analysis is used to identify the relationship between Variables.
+# Types of Data for Analysis
+  1. Cross Sectional Data
+  2. Time Series Data
+  3. Pooled Data
+  4. Panel Data
+    
+# Data Collection
+  1. primary data collection
+  2. secondary Data collection
 
 # Data Preporcessing
+  1. Data Cleaning
+      a.Removing trailing and leading spaces
+      b.Removing Punctuation marks               
+      c.Removing Outliers                        
+      d.Removing Missing Values                  
+  2. Data Preparation
+     a. Derived Columns if required                          
+     b. Convert Data to matrix                               
+     c. Normalize Data                                       
+     d. Data Partion for independent and Dependent variables 
+     e. One Hot Encoding                                     
+     f. Feature Selection
+     g. Class Imbalance
 
 # Selecting Data
 
