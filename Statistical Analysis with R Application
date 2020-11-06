@@ -799,19 +799,13 @@ mae <- function(error) { mean(abs(error)) }
 mae(mod$residuals)
 
 
-# Problems in Model and                      ---> Detection                         ---> possible solutions
-  1. Detecting Outliers                      ---> outlier test()                    -->> remove outliers
-  2. Decting Multicollinarity                ---> VIF()                       --->> remove highly correlated independent variables
-  3. Detecting Heteroscadasticiy             ---> bptest()                 --->> tranform data into log or box-cox transformation
-  4. Detecting Autocorrelation               ---> dwtest()                   --->> Improve model fit. Try to capture structure in the data in the model.
-  5. Detecting Overfitting and underfitting  --->> normalize data, transformation, use PCA
-  6. Dectecting Non-Linearity                 --> y = a + bx not fitting well --->> use PCA
-  7. Detecting Class Imbalance                --> prop table                  -->>use Oversampling and Under sampling
-  
-# Possible Solutions
-  1. remove outliers
-  2. remove highly correlated independent variables
-  3. tranform data into log
-  4. Improve model fit. Try to capture structure in the data in the model.
-  
+# Problems in Model and                      ---> Detection                     ---> possible solutions
+  1. Detecting Outliers                      ---> outlier test()                --->> remove outliers
+  2. Decting Multicollinarity                ---> VIF()                         --->> remove highly correlated independent variables
+  3. Detecting Heteroscadasticiy             ---> bptest()                      --->> tranform data into log or box-cox transformation
+  4. Detecting Autocorrelation               ---> dwtest()                      --->> Improve model fit. Try to capture structure in the data in the model.
+  5. Detecting Overfitting and underfitting                                     --->> normalize data, transformation, use PCA
+  6. Dectecting Non-Linearity                 --> y = a + bx not fitting well   --->> use PCA
+  7. Detecting Class Imbalance                --> prop table                    --->>use Oversampling and Under sampling
+
 
