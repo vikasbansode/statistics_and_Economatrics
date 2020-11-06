@@ -1,0 +1,769 @@
+setwd("C:\\Users\\VB\\Desktop\\stat with R")
+
+# Types of Analytics
+# 1. Descriptive Analytics : to know what happened.
+# 2. Predictive Analytics :  to predict the future
+# 3. Prescriptive Analytics :  to know what shoud be done.
+
+# Big Data : Big data is datasets that are very big and complex for computer to process.
+# Volume : People are now more connected, so there are many more data sources and as a consequence,
+# the amount of data incresed exponentially.
+# velocity : The speed of data is increasing and the speed of data coming in is so fast.
+# Variety ; More sources means more data in different format and types such as
+# Images, videos, voice, speech,textual data, numerical both structured and unstructured.
+
+# Descriptive Statistics, Inferential Statistics and Regression Analysis
+
+# Descriptive statistics is used to summarizes the data set and variables.
+# Inferential statistics is used to identify the relationship between data sets.
+# Regression Analysis is used to identify the relationship between Variables.
+
+# Data Preporcessing
+
+# Selecting Data
+
+data
+data[,c("x","x3")];
+data$x3
+
+# Sorting
+
+data[order(data$x3),]
+data[order(data$x3,decreasing = TRUE),]
+data[order(data$x3,data$x2),]
+
+# Filtering
+
+data[data$x > 0,]
+data[data$x > 0 & data$x < 1,]
+
+# Removing Missing Values
+
+na.omit(data)
+
+# Removing Duplicates
+
+data[!duplicated(data$x),]
+
+# Discriptive statistics
+
+# 1. measure of Central Tendency
+
+# mean
+
+A <- c(1,2,3,4,5,5,5,6,7,8)
+
+mean(A)
+
+# Median
+
+median(A)
+
+# Mode
+
+y <- table(A)
+
+names(y)[which(y==max(y))]
+
+
+#2. Measures of variability/dispersion
+
+min(A)
+max(A)
+range(A)
+IQR(A)
+quantile(A)
+quantile(A,0.25)
+quantile(A,0.75)
+var(A)
+N <- length(A)
+var(A) * (N-1)/N
+sd(A)
+
+# 3. Measures of Shapes
+# Modality
+
+install.packages('moments')
+library(moments)
+skewness(data$x)
+kurtosis(data$x)
+
+# Normal Distribution
+# histogram
+
+hist(data$x,breaks = 15)
+qqnorm(data$x)
+qqline(data$x)
+shapiro.test(data$x)
+
+# To generate random variables from a normal distribution you can use
+
+set.seed(123)
+N <- rnorm(1000,100,0.5)
+hist(N,breaks = 20)
+
+# to calculate cumulative distribtuion function (CDF)
+
+pnorm(1.9,3,0.5)
+
+# to calculate inverse CDF
+
+qnorm(0.95,3,0.5)
+
+# Binomial Distribution
+# To get the probability mass function (PMF)
+
+dbinom(32,100,0.5)
+
+# to get the cumulative distribution function (CDF) of a binomail distribution
+# you can use
+pbinom(32,100,0.5)
+
+# to get p-th quantile of the binomail distribution
+
+qbinom(0.3,100,0.5)
+
+# to generate random variables from binomial distribution
+
+set.seed(123)
+
+A <- rbinom(1000,100,0.5)
+hist(A,breaks = 20)
+
+# Summary and str functions
+summary(data)
+str(data)
+
+
+# Data visualization
+
+data1 <- c(4,6,7,9,10,20,12,8)
+
+
+# Noraml Barplot
+
+barplot(data1,xlab = "X-axis",ylab = "Y-axis",main = "Bar chart 1",col = "green")
+
+# Stacked bar chart
+
+data("mtcars")
+data <- table(mtcars$gear,mtcars$carb)
+barplot(data, xlab="x-axis", ylab="y-axis", main="bar chart1", col=c("grey", "blue", "yellow"));
+
+
+# Grouped Bar char
+barplot(data,xlab = "x-axis",ylab = "y-axis",main = "bar chart 1",col = c("gray","blue","yellow"),beside = TRUE)
+
+
+# Line Chart
+
+x <- c(1,2,3,4,5,6,8,9)
+y <- c(3,5,4,6,9,8,2,1)
+
+# Single Line chart
+
+plot(x,y,type = "l",xlab = "x-axis",ylab = "y-axis",main = "line graph",col="blue")
+
+# Multiple Line Chart
+
+x.1 <- c(2, 3, 4, 6, 7, 8, 9, 10)
+y.1 <- c(6, 3, 5, 1, 5, 3, 4, 8)
+
+plot(x, y, type="l", xlab="x-axis", ylab="y-axis", main="linegraph", col="blue")
+lines(x.1, y.1, type="o", col="green")
+
+
+# Pie Chart
+x <- c(10,30,60,10,50)
+
+labels <- c("one","two","three","four","five")
+
+pie(x,labels,main = "Pie Chart")
+
+# 3D Pie chart
+install.packages("plotrix")
+library(plotrix)
+pie3D(x,labels = labels,explode = 0.1,main="Pie Chart")
+
+
+
+# Scatter plot
+
+x <- c(1, 2, 3, 4, 5, 6, 8, 9)
+y <- c(3, 5, 4, 6, 9, 8, 2, 1)
+
+plot(x,y,xlab = "x-axis",ylab = "y-axis",main = "scatterplot")
+
+
+# Boxplot
+
+set.seed(12)
+var1 <- rnorm(100, mean=3, sd=3)
+var2 <- rnorm(100, mean=2, sd=2)
+var3 <- rnorm(100, mean=1, sd=3)
+data <- data.frame(var1, var2, var3)
+boxplot(data, main="boxplot", notch=FALSE, varwidth=TRUE,col=c("green", "purple", "blue"))
+
+# Box plot with notch
+
+boxplot(data, main="boxplot", notch=TRUE, varwidth=TRUE,col=c("green", "purple", "blue"))
+
+
+# Scatterplot matrix
+set.seed(12);
+var1 <- rnorm(100, mean=1, sd=3);
+var2 <- rnorm(100, mean=1, sd=3);
+var3 <- rnorm(100, mean=1, sd=3);
+var4 <- rnorm(100, mean=2, sd=3);
+var5 <- rnorm(100, mean=2, sd=3);
+data <- data.frame(var1, var2, var3, var4, var5);
+pairs(~var1+var2+var3+var4+var5, data=data, main="scatterplot
+matrix")
+
+
+# Social Network Analysis Graph Basics
+library(igraph)
+
+# Undirected Graph
+g <- graph(edges = c("John","James","James","Mary","Mary","John"),directed = FALSE)
+plot(g)
+
+
+# Directed Graph
+g <- graph(edges = c("John","James","James","Mary","Mary","John"),directed = TRUE)
+plot(g)
+
+# ggplot2
+library(ggplot2)
+# Grammer of Graphics
+# Data
+# Aesthemic Mapping
+# Geometric objects
+# statistical information
+# Scales
+# Coordinate system
+# position adjustments
+# Faceting
+
+set.seed(12)
+var1 <- rnorm(100,mean = 1,sd=1)
+var2 <- rnorm(100,mean = 2,sd=1)
+var3 <- rnorm(100,mean = 1,sd=2)
+
+data <- data.frame(var1,var2,var3)
+ggplot(data)
+
+# Aesthetic mapping in ggplot2
+
+# Position
+# Color
+# Fill
+# Shape
+# Line Type
+# Size
+
+ggplot(data,aes(x=var1,y=var2))
+
+# Geometry  mapping in ggplot2
+
+ggplot(data,aes(x=var1,y=var2)) +
+  geom_point(aes(color="red"))
+
+
+ggplot(data,aes(x=var1,y=var2)) +
+  geom_point(aes(color="red")) +
+  geom_smooth()
+
+
+# Labels in ggplot2
+
+ggplot(data,aes(x=var1,y=var2)) +
+  geom_point(aes(color="red")) +
+  geom_smooth() +
+  labs(title = "scatter plot",x="x-axis",y="y-axis",color="Color")
+
+# Themes in ggplot2
+# Axis lables
+# Plot background
+# Facet background
+# Legend appearance
+
+ggplot(data,aes(x=var1,y=var2)) +
+  geom_point(aes(color="red")) +
+  geom_smooth() +
+  labs(title = "scatter plot",x="x-axis",y="y-axis",color="Color") +
+  theme_light()
+
+
+# ggplot common charts
+# Bar Chart
+
+d <- c(1,5,8,9,8,2,1)
+df <- data.frame(d)
+
+
+# Vertical bar chart
+
+ggplot(df) +
+  geom_bar(aes(color="gray",x=d)) +
+  labs(title = "bar chart") +
+  theme_light()
+
+# horizontal bar chart
+
+ggplot(df) +
+  geom_bar(aes(color="gray",x=d)) +
+  labs(title = "bar chart") +
+  theme_light() +
+  coord_flip()
+
+# Histogram
+
+set.seed(12)
+var1 <- rnorm(100,mean = 1,sd=1)
+var2 <- rnorm(100,mean=2,sd=1)
+var3 <- rnorm(100,mean = 1,sd=2);
+
+data <- data.frame(var1,var2,var3)
+
+ggplot(data) +
+  aes(x=var1) +
+  geom_histogram(bins = 10,color="black",fill="grey") +
+  labs(title = "histogram") +
+  theme_light()
+
+# Density Plot
+
+ggplot(data) +
+  aes(x=var1) +
+  geom_density(fill="blue") +
+  labs(title = "density") +
+  theme_light()
+
+
+# Scatter plot
+
+# below plot create ambiguity as aesthetic and geom mapping separated
+ggplot(data) +
+  aes(x=var1,y=var2) +
+  geom_point(color="green") +
+  aes(x=var1,y=var3) +
+  geom_point(color="red") +
+  labs(title = "scatter plot") +
+  theme_light()
+
+# to avoid ambiguity use asethetic inside geom mapping
+
+ggplot(data) +
+  geom_point(aes(color="red",x=var1,y=var2)) +
+  geom_point(aes(color="green",x=var1,y=var3)) +
+  labs(title = "scatterplot") +
+  theme_light()
+
+# Line Chart
+
+ggplot(data) +
+  geom_line(aes(color="red",x=var1,y=var2)) +
+  geom_line(aes(color="green",x=var1,y=var3)) +
+  labs(title = "line chart") +
+  theme_light()
+
+
+# Boxplot
+
+ggplot(data) +
+  aes(y=var2) +
+  geom_boxplot(fill="grey") +
+  labs(title = "boxplot")
+  
+
+# Density
+ggplot(data) +
+  aes(x=var1) +
+  geom_density(fill='grey') +
+  labs(title = 'density') +
+  theme(panel.background = element_rect(fill = "yellow"),panel.grid.major = element_line(color = 'blue',size = 2))
+
+
+# Interactive charts with ggplot and plotly
+library(plotly)
+
+gg <- ggplot(data) +
+  geom_line(aes(x=var1,y=var2))
+
+g <- ggplotly(gg)
+g
+
+
+# What is Descriptive Statistics?
+# Descriptive Statistics derives a summary from the data set and
+# makes use of
+# central tendency
+# dispersion
+# skewness and kurtosis
+
+
+# Inferential statistics and Regression
+
+# correlations and covariance
+# Parametric tests such as
+# p-value
+# t-test
+# z-test
+# chi-square
+# ANOVA
+
+# Non-parametric tests such as
+# Wilcoxon signed rank test
+# Wilcoxon Mann whitney test
+# Kruskal-Wallis test
+
+# simple linear Regression Analysis
+# Multiple linear Regression Analysis
+
+# Hypothesis Testing
+# based on research question hypothesis can be
+# Null Hypothesis or
+# Alternate Hypothesis
+# P-value is a hypothesis result
+# alpha always 0.05
+
+# if p-value is less than or equal to alpha you reject null hypothesis.
+# if p-value is more than alpha, you accept alternative hypothesis.
+
+# For estimating parameters, the parameters can be mean,variance,standard deviation and others.
+
+
+
+# Regression Analysis :
+# Regression Analysis is used to understand the relationships among independent variables
+# and dependent variables and to explore the forms of the relationships.
+
+# apply(),lapply(),sapply()
+# The use of the apply() function is to avoid the use of loops.
+# The apply() function can take list,matrix, or array
+
+set.seed(123)
+
+var1 <- rnorm(100,mean=2,sd=1)
+var2 <- rnorm(100,mean=3,sd=1)
+var3 <- rnorm(100,mean=3,sd=2)
+
+data <- data.frame(var1,var2,var3)
+data
+
+# you can use the apply() function with a mean() function
+
+apply(data, 1,mean) # applied on row
+
+# margin means that the fuction will be applied to a column when
+# it is 2 and a row when it is 1.
+
+apply(data, 2, mean) # applied on column
+
+
+# lapply() function takes list as input give list as output
+lapply(data$var1, mean)
+
+# sapply() function takes list as input and gives vector as output
+
+sapply(data$var1, mean)
+
+# Sampling :
+# ----------
+
+# simple Random Sampling
+# Stratified Sampling
+# Cluster sampling
+# systematic sampling
+
+# You can do simple random sampling using the sample() function:
+
+sample(data$var1,5,replace = TRUE)
+
+# data$var1 is the data,
+# 5 is the number of items to select from
+# replace=TRUE means that the chosen item can be repeated .
+# if replace is FALSE then the chosen item cannot be repeated.
+
+# You can do stratified sampling using the dplyr library
+library(dplyr)
+data("iris")
+summary(iris)
+
+iris_sample <- iris %>% 
+  group_by(Species) %>%
+  sample_n(13)
+
+iris_sample
+
+# Correlations :
+# -------------
+
+# Correlations are statistical associations to find how close two variables
+# are and to derive the linear relationships between them.
+
+# correlation is good for measuring how good the relationship between two variables is.
+
+cor(data$var1,data$var2)
+
+# Covariance :
+# ------------
+
+# Covariance is a measure of variability between two variables.
+
+cov(data$var1,data$var2)
+
+# correlation and covariance are usually within descriptive statistics.
+
+
+# Hypothesis Testing and P-Value :
+# --------------------------------
+
+# In hypothesis testing, a research question is a hypothesis asked in question format.
+# A research question can be, Is there a significant difference between something.
+
+# A Hypothesis can be There is a significant difference between something.
+
+# The research question begins with Is there? and
+# Hypothesis question begins with There is.
+
+# A small p-value means you rejected null hypothesis and accepted alternative hypothesis.
+# A larger p-value means that you accept null hypothesis and rejected alternative hypothesis.
+
+
+# Types of Error
+# Type I error : A type I error is a rejection of the null hypothesis when it is really true.
+# Type II error : A type II error is a failure to reject a null hypothesis that is false.
+
+# one sample T-test :
+
+# H0 : mu = m
+# Ha : mu != m
+
+t.test(data$var1,mu=0.6)
+
+# Two sample Independent T-Test
+
+t.test(data$var1,data$var2,var.equal = TRUE,paired = FALSE)
+
+# To use the two-sample unpaired t-test with a variance as unequal
+
+t.test(data$var1,data$var2,var.equal = FALSE,paired = FALSE)
+
+# Two Sample Dependent T-Test :
+# -----------------------------
+
+t.test(data$var1,data$var2,paired = TRUE)
+
+# Chi-square Test :
+# -----------------
+
+# The chi-square test is used to compare the relationships between
+# two categorical variables.
+# The null hypothesis means that there is no relationship between the categorical variables.
+# The alternate hypothesis means that there is a relationship between the categorical variables.
+
+
+# Goodness of Fit Test :
+# ---------------------
+
+# When you have only one categorical variable from a population and you want to
+# compare whether the sample is consistent with a hypothesized distribution, you can use the goodness of fit test.
+
+data1 <- c(B=200,c=300,D=400)
+chisq.test(data1)
+
+# Contigency Test :
+# -----------------
+
+# If you have two categorical variables and you want to compare whether there is a relationship
+# between two variables, you can use the contigency test.
+
+# H0 = two categorical variable have no relationship
+# Ha = two categorical variable have relationship
+
+var1 <- c("Male", "Female", "Male", "Female", "Male",
+          "Female", "Male", "Female", "Male", "Female")
+
+var2 <- c("chocolate", "strawberry", "strawberry",
+          "strawberry", "chocolate", "chocolate", "chocolate",
+          "strawberry", "strawberry", "strawberry")
+
+data3 <- data.frame(var1,var2)
+data3
+
+data.table <- table(data3$var1,data3$var2)
+data.table
+
+chisq.test(data.table)
+
+
+# ANOVA :
+# -------
+
+# ANOVA is the process of testing the means of two or more groups.
+
+# Grand Mean :
+# -----------
+
+# In ANOVA, you use two kinds of means, sample means and a grand mean.
+
+# Hypothesis :
+# ------------
+
+# In ANOVA, a null hypothesis means that the sample means are equal or do not have
+# significant differences.
+# The alternate hypothesis is when the sample means are not equal.
+
+# Assumptions :
+# ------------
+
+# You assume that the variables are sampled, independent, and selected or
+# sampled from a population that is normally distributed with unknown but equal variances.
+
+# Between Group Variability :
+# ---------------------------
+
+# The distribution of two samples, when they overlap, their means are not
+# significantly different. Hence, the difference between their individual mean
+# and the grand mean is not significantly different.
+
+# Within Group Variability :
+# --------------------------
+
+# for the distributions of samples, as their variance increases, they
+# Overlap each other and become part of a population.
+
+
+# One-way ANOVA :
+# --------------
+
+# One way ANOVA is used when you have only one independent variable.
+
+set.seed(123)
+var1 <- rnorm(12,mean = 2,sd=1)
+var2 <- c("B", "B", "B", "B", "C", "C", "C", "C", "C", "D",
+          "D", "B")
+
+data4 <- data.frame(var1,var2)
+data4
+fit <- aov(data4$var1 ~ data4$var2,data = data4)
+fit
+summary(fit)
+
+# The p-value is more than 0.05, so you fail to reject the 
+# null hypothesis that the mean of var1 is the same as the mean of var2.
+# The null hypothesis is true at the 95% confidence interval.
+
+# Two way ANOVA :
+# ---------------
+
+# Two way ANOVA is used when you have two independent variables.
+
+var1 <- rnorm(12,mean = 2,sd=1)
+var2 <- c('B','B','B','B','C','C','C','C','C','D','D','B')
+var3 <- c('D','D','D','D','E','E','E','E','E','F','F','F')
+data5 <- data.frame(var1,var2,var3)
+
+fit <- aov(data5$var1 ~ data5$var2 + data5$var3,data = data5)
+fit
+summary(fit)
+
+# MANOVA :
+# ---------
+
+# The multivariate analysis of variance is when there are multiple response
+# variables that you want to test.
+
+data("iris")
+str(iris)
+summary(iris)
+
+
+res <- manova(cbind(iris$Sepal.Length,iris$Petal.Length) ~ iris$Species,data=iris)
+summary(res)
+summary.aov(res)
+
+# The p-value is less than 0.05. Hence, you reject the null hypothesis.
+# The alternate hypothesis is true at the 95% confidence interval.
+
+
+# Non-parametric Test:
+# -------------------
+
+# The non-parametric test is a test that does not require the variables
+# and sample to be normally distributed. you use non-parametric tests when
+# you do not have normally distributed data and the sample data is big.
+
+# Wilcoxon Signed Rank Test :
+# ---------------------------
+
+# The wilcoxon signed rank test is used to replace the one-sample t-test.
+
+install.packages("random")
+library(random)
+
+var1 <- randomNumbers(n=100, min=1, max=1000, col=1)
+var2 <- randomNumbers(n=100, min=1, max=1000, col=1)
+var3 <- randomNumbers(n=100, min=1, max=1000, col=1)
+
+data <- data.frame(var1[,1], var2[,1], var3[,1])
+
+wilcox.test(data[,1], mu=0, alternatives="two.sided")
+
+# Wilcoxon-Mann-Whitney Test :
+# ----------------------------
+
+# The Wilcoxon-Mann-Whitney test is a non-parametric test to compare two samples.
+# It is a powerful substitute to the two-sample t-test.
+
+wilcox.test(data$var1,data$var2,correct = FALSE)
+
+# Kruskal-Wallis Test :
+# --------------------
+
+# The Kruskal-Wallis test is a non-parametric test that is an extension
+# of the Mann-Whitney U test for three or more samples.
+
+
+# Linear Regression Analysis :
+# ----------------------------
+
+# Regression analysis is a form of predictive modelling techniques that
+# Identify the relationships between dependent and independent variables.
+# The technique is used to find causal effect relashinships between variables.
+
+set.seed(123)
+x <- rnorm(100, mean=1, sd=1)
+y <- rnorm(100, mean=2, sd=2)
+data <- data.frame(x, y)
+mod <- lm(data$y ~ data$x, data=data)
+mod
+summary(mod)
+
+# Multiple Linear Regression Analysis :
+# -------------------------------------
+
+set.seed(123)
+x <- rnorm(100, mean=1, sd=1)
+x2 <- rnorm(100, mean=2, sd=5)
+y <- rnorm(100, mean=2, sd=2)
+data <- data.frame(x, x2, y)
+mod <- lm(data$y ~ data$x + data$x2, data=data)
+mod
+summary(mod)
+
+mod.error = summary(mod)
+mod.error$sigma
+
+
+# Function for Root Mean Squared Error
+RMSE <- function(error) { sqrt(mean(error^2)) }
+RMSE(mod$residuals)
+
+# If you want, say, MAE, you can do the following:
+
+# Function for Mean Absolute Error
+mae <- function(error) { mean(abs(error)) }
+mae(mod$residuals)
