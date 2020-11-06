@@ -7,19 +7,17 @@ setwd("C:\\Users\\VB\\Desktop\\stat with R")
 # 3. Prescriptive Analytics :  to know what shoud be done.
 
 # Big Data : Big data is datasets that are very big and complex for computer to process.
-# Volume : People are now more connected, so there are many more data sources and as a consequence,
-# the amount of data incresed exponentially.
+# Volume : People are now more connected, so there are many more data sources and as a consequence, the amount of data incresed exponentially.
 # velocity : The speed of data is increasing and the speed of data coming in is so fast.
-# Variety ; More sources means more data in different format and types such as
-# Images, videos, voice, speech,textual data, numerical both structured and unstructured.
+# Variety ; More sources means more data in different format and types such as Images, videos, voice, speech,textual data, numerical both structured and unstructured.
 
 # Branches of Statistics
   1. Descriptive Statistics ->>  Descriptive statistics is used to summarizes the data set and variables.
-    a. Measures of central tendency
-    b. Measures of Dispersion
-    c. Measures of Shapes
-    d. Correlation and Covaraince
-    e. Visualization
+    a. Measures of central tendency  ---> to calculate middle most value
+    b. Measures of Dispersion --> to calculate dispersion from the middle value
+    c. Measures of Shapes --> to check distribution of the data
+    d. Correlation and Covaraince --> to find how close variables are related with each other
+    e. Visualization  --> to see the distributionof the data in single shot.
   2. Inferential Statistics ->> Inferential statistics is used to identify the relationship between data sets. 
     a. Estimation
     b. Hypothesis Testing
